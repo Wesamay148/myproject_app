@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:myproject_app/FormScreen.dart';
 import 'package:myproject_app/data/locations.dart';
 import 'package:myproject_app/DetailsScreen.dart';
+import 'package:myproject_app/models/Location.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -19,15 +21,29 @@ class MyApp extends StatelessWidget {
   }
 }
 class ListViewBuilder extends StatelessWidget {
-  locationsAll location = new locationsAll();
+  static List<Location> listobj =   new locationsAll().listobj;
+  ListViewBuilder(){
+
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => FormScreen()),
+            );
+          },
+
+        ),
       appBar: AppBar(
           title:Text("favLocations")
       ),
       body: ListView.builder(
-    itemCount: 5,
+    itemCount: listobj.length,
+
     itemBuilder: (BuildContext context,int index){
     return Center(
     child: Card(
@@ -38,15 +54,19 @@ class ListViewBuilder extends StatelessWidget {
             context,
             MaterialPageRoute(builder: (context) => SecondRoute(i:index)),
           );
+          //
+          /*
+
+          * */
     },
     child: Column(children:<Widget>[
-    Container(height: 240, width: 380, child:Image.network(location.listobj[index].imageUrl)),
+    Container(height: 240, width: 380, child:Image.network(listobj[index].imageUrl)),
       Padding(
         padding: const
         EdgeInsets.symmetric(vertical:5.0),
       ),
-      Text(location.listobj[index].name),
-      Text(location.listobj[index].theme,style:TextStyle(color:Colors.grey)),
+      Text(listobj[index].name),
+      Text(listobj[index].theme,style:TextStyle(color:Colors.grey)),
       Padding(
         padding: const
         EdgeInsets.symmetric(vertical:5.0),

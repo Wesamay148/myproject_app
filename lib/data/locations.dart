@@ -1,5 +1,4 @@
 import 'package:myproject_app/models/Location.dart';
-
 class locationsAll {
   List<Location> listobj = [
     Location(
